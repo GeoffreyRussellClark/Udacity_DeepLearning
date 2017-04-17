@@ -53,10 +53,10 @@ beta = 0.005 #for l2 regularisation
 dropout_prob = 1 #89% with 0.5 #87.5% with no dropout #90.7% with beta =0.005 #87.5% with both
 learning_rate = 0.0005"""
 
-batch_size = 64 #92.5%
+batch_size = 256 #92.5%
 patch_size = 5
 depth = 16
-num_hidden = 64
+num_hidden = 1024 #94.4%
 stride = 1
 pstride = 2
 learning_rate = 0.0001
@@ -130,7 +130,7 @@ with tf.Session(graph=graph) as session:
     feed_dict = {tf_train_dataset : batch_data, tf_train_labels : batch_labels, keep_prob : dropout_prob}
     _, l, predictions = session.run(
       [optimizer, loss, train_prediction], feed_dict=feed_dict)
-    if (step % 50 == 0):
+    if (step % 500 == 0):
       print('Minibatch loss at step %d: %f' % (step, l))
       print('Minibatch accuracy: %.1f%%' % accuracy(predictions, batch_labels))
       print('Validation accuracy: %.1f%%' % accuracy(
